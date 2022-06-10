@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/Navbar/style.js", "components/Filter/style.js"  ],
   "exclude": [
     "node_modules"
   ]
