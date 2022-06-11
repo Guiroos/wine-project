@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const FilterList = styled.ul`
   width: 242px;
   height: 100%;
-  background-color: white;
   list-style: none;
   font-family: 'Lato', sans-serif;
   font-style: normal;

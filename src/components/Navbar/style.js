@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Bar = styled.nav`
-  position: absolute;
+  position: relative;
   width: 100%;
   padding: 0 152px 0 152px;
   height: 88.23px;
