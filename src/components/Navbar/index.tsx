@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Bar, FlexDiv, StyleLink, IconDiv, ImageDiv } from "./style";
 import { CgProfile, CgSearch, CgShoppingCart } from "react-icons/cg";
-import wine from "../../public/wine.svg";
+import wine from "../../../public/wine.svg";
 
 export default function Navbar() {
   return (
