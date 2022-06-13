@@ -49,6 +49,7 @@ export const ProductCardNonMemberCardDiv = styled.div`
   font-weight: 700;
   color: #888888;
   font-size: 12px;
+  margin-bottom: 10px;
 `;
 
 
