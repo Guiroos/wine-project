@@ -1,6 +1,11 @@
+import React, { Dispatch, SetStateAction } from "react";
 import { FilterList } from "./style";
 
-export default function Filter() {
+interface FilterProps {
+  setFilter: Dispatch<SetStateAction<string>>;
+}
+
+const Filter: React.FC<FilterProps> = ({ setFilter }: FilterProps) => {
   return (
     <div>
       <FilterList>
@@ -8,30 +13,62 @@ export default function Filter() {
         <p>Por preço</p>
         <li>
           <label>
-            <input type="radio" value="40" name="filter" /> Até R$40
+            <input
+              type="radio"
+              value={["0", "40"]}
+              name="filter"
+              onChange={(e) => setFilter(e.target.value)}
+            />
+            Até R$40
           </label>
         </li>
         <li>
           <label>
-            <input type="radio" value="40" name="filter" /> R$40 A R$60
+            <input
+              type="radio"
+              value={["40", "100"]}
+              name="filter"
+              onChange={(e) => setFilter(e.target.value)}
+            />
+            R$40 A R$100
           </label>
         </li>
         <li>
           <label>
-            <input type="radio" value="40" name="filter" /> R$100 A R$200
+            <input
+              type="radio"
+              value={["100", "200"]}
+              name="filter"
+              onChange={(e) => setFilter(e.target.value)}
+            />
+            R$100 A R$200
           </label>
         </li>
         <li>
           <label>
-            <input type="radio" value="40" name="filter" /> R$200 A R$500
+            <input
+              type="radio"
+              value={["200", "500"]}
+              name="filter"
+              onChange={(e) => setFilter(e.target.value)}
+            />
+            R$200 A R$500
           </label>
         </li>
         <li>
           <label>
-            <input type="radio" value="40" name="filter" /> Acima de R$500
+            <input
+              type="radio"
+              value={["500", "1000000"]}
+              name="filter"
+              onChange={(e) => setFilter(e.target.value)}
+            />
+            Acima de R$500
           </label>
         </li>
       </FilterList>
     </div>
   );
-}
+};
+
+export default Filter;
