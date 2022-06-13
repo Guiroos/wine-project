@@ -12,6 +12,10 @@ import { StoreDiv, ProductGridDiv, ProductDiv, FoundItemsDiv } from "./style";
 
 const Catalog: React.FC = () => {
   const [products, setProducts] = useState<string[] | []>([]);
+  const [filteredProducts, setFilteredProducts] = useState<string[] | []>([]);
+  const [filter, setFilter] = useState<string>("");
+  // const [searchedProducts, setSearchedProducts] = useState<string[] | []>([]);
+  // const [search, setSearch] = useState<string>("");
   const [cartItems, setCartItems] = useState([]);
   const [totalItems, setTotalItems] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
@@ -20,8 +24,14 @@ const Catalog: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    saveToLocalStorage("cart", cartItems);
-  }, [cartItems]);
+    const cart = getItemLocalStorage("cart");
+    if (cart) {
+      setCartItems(cart);
+    } else {
+      setCartItems([]);
+      saveToLocalStorage("cart", cartItems);
+    }
+  }, [setCartItems]);
 
   useEffect(() => {
     setLoading(true);
@@ -34,7 +44,6 @@ const Catalog: React.FC = () => {
         setProducts(data.items);
         setTotalItems(data.totalItems);
         setTotalPages(data.totalPages);
-        console.log(data);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -43,31 +52,77 @@ const Catalog: React.FC = () => {
     asyncFunc();
   }, [currentPage]);
 
+  useEffect(() => {
+    if (filter !== "") {
+      setLoading(true);
+      const asyncFunc = async () => {
+        try {
+          const response = await fetch(
+            `https://wine-back-test.herokuapp.com/products`
+          );
+          const data = await response.json();
+          setProducts(data.items);
+          setTotalItems(data.totalItems);
+          setTotalPages(data.totalPages);
+          setLoading(false);
+        } catch (error) {
+          setError(error);
+        }
+      };
+      asyncFunc();
+      const firstFilter = +filter.split(",")[0];
+      const secondFilter = +filter.split(",")[1];
+      const filteredProducts = products.filter((product: any) => {
+        return (
+          product.priceNonMember >= firstFilter &&
+          product.priceNonMember <= secondFilter
+        );
+      });
+      setFilteredProducts(filteredProducts);
+    }
+  }, [filter]);
+
   return (
     <div>
-      <Navbar />
+      <Navbar cartItems={cartItems} />
+
       <StoreDiv>
-        <Filter />
-        <ProductDiv>
-          <FoundItemsDiv>
-            <span>{totalItems}</span>
-            <span>produtos encontrados</span>
-          </FoundItemsDiv>
-          <ProductGridDiv>
-            {products.map((product) => (
-              <ProductsCard
-                key={product.id}
-                product={product}
-                cartItems={cartItems}
-                setCartItems={setCartItems}
-              />
-            ))}
-          </ProductGridDiv>
-          <PagesButton
-            totalPages={totalPages}
-            setCurrentPage={setCurrentPage}
-          />
-        </ProductDiv>
+        <Filter setFilter={setFilter} />
+        {loading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div>{error}</div>
+        ) : (
+          <ProductDiv>
+            <FoundItemsDiv>
+              <span>{filter ? filteredProducts.length : totalItems}</span>
+              <span>produtos encontrados</span>
+            </FoundItemsDiv>
+            <ProductGridDiv>
+              {filter
+                ? filteredProducts.map((product) => (
+                    <ProductsCard
+                      key={product.id}
+                      product={product}
+                      cartItems={cartItems}
+                      setCartItems={setCartItems}
+                    />
+                  ))
+                : products.map((product) => (
+                    <ProductsCard
+                      key={product.id}
+                      product={product}
+                      cartItems={cartItems}
+                      setCartItems={setCartItems}
+                    />
+                  ))}
+            </ProductGridDiv>
+            <PagesButton
+              totalPages={totalPages}
+              setCurrentPage={setCurrentPage}
+            />
+          </ProductDiv>
+        )}
       </StoreDiv>
     </div>
   );
