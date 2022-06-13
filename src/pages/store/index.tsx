@@ -3,16 +3,25 @@ import Filter from "../../components/Filter/index";
 import Navbar from "../../components/Navbar/index";
 import PagesButton from "../../components/PagesButton/index";
 import ProductsCard from "../../components/ProductCard/index";
+import {
+  getItemLocalStorage,
+  saveToLocalStorage,
+} from "../../utils/localStorage";
 
 import { StoreDiv, ProductGridDiv, ProductDiv, FoundItemsDiv } from "./style";
 
 const Catalog: React.FC = () => {
   const [products, setProducts] = useState<string[] | []>([]);
+  const [cartItems, setCartItems] = useState([]);
   const [totalItems, setTotalItems] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    saveToLocalStorage("cart", cartItems);
+  }, [cartItems]);
 
   useEffect(() => {
     setLoading(true);
@@ -46,7 +55,12 @@ const Catalog: React.FC = () => {
           </FoundItemsDiv>
           <ProductGridDiv>
             {products.map((product) => (
-              <ProductsCard key={product.id} {...product} />
+              <ProductsCard
+                key={product.id}
+                product={product}
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+              />
             ))}
           </ProductGridDiv>
           <PagesButton
