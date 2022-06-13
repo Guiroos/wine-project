@@ -12,6 +12,7 @@ export const ProductDiv = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
+  margin: 0px 150px 0px 150px;
 `;
 
 export const FoundItemsDiv = styled.div`
@@ -25,10 +26,10 @@ export const FoundItemsDiv = styled.div`
   }
 `;
 
-
 export const ProductGridDiv = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit,minmax(300px, 1fr));
   width: 100%;
   grid-gap: 32px;
+
 `;
