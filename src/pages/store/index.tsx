@@ -8,7 +8,12 @@ import {
   saveToLocalStorage,
 } from "../../utils/localStorage";
 
-import { StoreDiv, ProductGridDiv, ProductDiv, FoundItemsDiv } from "./style";
+import {
+  StoreDiv,
+  ProductGridDiv,
+  ProductDiv,
+  FoundItemsDiv,
+} from "../../styles/pages/store";
 
 const Catalog: React.FC = () => {
   const [products, setProducts] = useState<string[] | []>([]);
