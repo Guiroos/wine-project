@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import { formatPriceBRL } from "../../utils/functions";
 import { saveToLocalStorage } from "../../utils/localStorage";
@@ -11,6 +11,7 @@ import {
   ProductCardButtonDiv,
   ProductCardButton,
 } from "./style";
+import Link from "next/link";
 
 interface Product {
   id: number;
@@ -59,36 +60,38 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div>
-      <ProductCardDiv>
-        <Image
-          src={product.image}
-          alt={product.name}
-          height="220"
-          width="140"
-        />
-        <div>
+      <Link href={`store/product/${product.id}`}>
+        <ProductCardDiv>
+          <Image
+            src={product.image}
+            alt={product.name}
+            height="220"
+            width="140"
+          />
           <div>
-            <div>{product.name}</div>
+            <div>
+              <div>{product.name}</div>
+            </div>
+            <div>
+              <ProductCardPriceDiv>
+                <div>{formatPriceBRL.format(product.price)}</div>
+                <div>{`${product.discount}% OFF`}</div>
+              </ProductCardPriceDiv>
+              <ProductCardMemberCardDiv>
+                <span>SÓCIO WINE</span>
+                <div>
+                  <span>R$</span>
+                  <span>{`${firstHalfPriceMember},`}</span>
+                  <span>{`${secondHalfPriceMember}`}</span>
+                </div>
+              </ProductCardMemberCardDiv>
+              <ProductCardNonMemberCardDiv>
+                {`NÃO SÓCIO ${formatPriceBRL.format(product.priceNonMember)}`}
+              </ProductCardNonMemberCardDiv>
+            </div>
           </div>
-          <div>
-            <ProductCardPriceDiv>
-              <div>{formatPriceBRL.format(product.price)}</div>
-              <div>{`${product.discount}% OFF`}</div>
-            </ProductCardPriceDiv>
-            <ProductCardMemberCardDiv>
-              <span>SÓCIO WINE</span>
-              <div>
-                <span>R$</span>
-                <span>{`${firstHalfPriceMember},`}</span>
-                <span>{`${secondHalfPriceMember}`}</span>
-              </div>
-            </ProductCardMemberCardDiv>
-            <ProductCardNonMemberCardDiv>
-              {`NÃO SÓCIO ${formatPriceBRL.format(product.priceNonMember)}`}
-            </ProductCardNonMemberCardDiv>
-          </div>
-        </div>
-      </ProductCardDiv>
+        </ProductCardDiv>
+      </Link>
       <ProductCardButtonDiv>
         <ProductCardButton type="button" onClick={onAddToCart}>
           ADICIONAR

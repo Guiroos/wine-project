@@ -1,18 +1,31 @@
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Bar, FlexDiv, StyleLink, IconDiv, ImageDiv } from "./style";
 import { CgProfile, CgSearch, CgShoppingCart } from "react-icons/cg";
 import wine from "../../../public/wine.svg";
 
-export default function Navbar() {
+interface Product {
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  priceMember: number;
+  priceNonMember: number;
+}
+
+interface NavbarProps {
+  cartItems?: Product[];
+}
+
+const Navbar: React.FC<NavbarProps> = ({ cartItems }: NavbarProps) => {
+  const [showCart, setShowCart] = useState(false);
+
   return (
     <Bar>
       <FlexDiv>
         <ImageDiv>
-          <Image
-            src={wine}
-            alt="logo"
-          />
+          <Image src={wine} alt="logo" />
         </ImageDiv>
         <FlexDiv>
           <Link href="/store">
@@ -39,10 +52,14 @@ export default function Navbar() {
         <IconDiv>
           <CgProfile size={50} />
         </IconDiv>
-        <IconDiv>
-          <CgShoppingCart size={50} />
-        </IconDiv>
+        <Link href="/cart">
+          <IconDiv onClick={() => setShowCart(!showCart)}>
+            <CgShoppingCart size={50} />
+          </IconDiv>
+        </Link>
       </FlexDiv>
     </Bar>
   );
-}
+};
+
+export default Navbar;
