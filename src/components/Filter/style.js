@@ -6,6 +6,7 @@ export const FilterList = styled.ul`
   list-style: none;
   font-family: 'Lato', sans-serif;
   font-style: normal;
+  margin-left: 40px;
   p{
     height: 19px;
     font-weight: 700;

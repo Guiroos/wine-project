@@ -1,10 +1,10 @@
-import {FilterList} from './style';
+import { FilterList } from "./style";
 
 export default function Filter() {
   return (
     <div>
-      <h1>Refine sua Busca</h1>
       <FilterList>
+        <h2>Refine sua Busca</h2>
         <p>Por preço</p>
         <li>
           <label>
