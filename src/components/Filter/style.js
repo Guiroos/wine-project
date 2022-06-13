@@ -7,11 +7,15 @@ export const FilterList = styled.ul`
   font-family: 'Lato', sans-serif;
   font-style: normal;
   margin-left: 40px;
-  p{
+  p:first-child{
     height: 19px;
     font-weight: 700;
     font-size: 18;
     line-height: 22px;
+  }
+  p:last-child{
+    text-decoration: underline;
+    cursor: pointer;
   }
   label {
     display: flex;
