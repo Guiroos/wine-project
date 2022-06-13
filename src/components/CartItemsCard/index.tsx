@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-interface cartItem {
+interface CartItem {
   id: number;
   discount: number;
   image: string;
@@ -12,13 +12,13 @@ interface cartItem {
   country: string;
 }
 
-interface CartItemsCardProps {
-  cartItem: cartItem;
+interface CartItemCardProps {
+  cartItem: CartItem;
 }
 
-const CartItemsCard: React.FC<CartItemsCardProps> = ({
+const CartItemsCard: React.FC<CartItemCardProps> = ({
   cartItem,
-}: CartItemsCardProps) => {
+}: CartItemCardProps) => {
   return (
     <div>
       <div>

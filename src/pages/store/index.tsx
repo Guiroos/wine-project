@@ -50,8 +50,8 @@ const Catalog: React.FC = () => {
         setTotalItems(data.totalItems);
         setTotalPages(data.totalPages);
         setLoading(false);
-      } catch (error) {
-        setError(error);
+      } catch (err) {
+        setError(err);
       }
     };
     asyncFunc();
@@ -70,20 +70,20 @@ const Catalog: React.FC = () => {
           setTotalItems(data.totalItems);
           setTotalPages(data.totalPages);
           setLoading(false);
-        } catch (error) {
-          setError(error);
+        } catch (err) {
+          setError(err);
         }
       };
       asyncFunc();
       const firstFilter = +filter.split(",")[0];
       const secondFilter = +filter.split(",")[1];
-      const filteredProducts = products.filter((product: any) => {
+      const filtered = products.filter((product: any) => {
         return (
           product.priceNonMember >= firstFilter &&
           product.priceNonMember <= secondFilter
         );
       });
-      setFilteredProducts(filteredProducts);
+      setFilteredProducts(filtered);
     }
   }, [filter]);
 

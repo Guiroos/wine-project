@@ -7,8 +7,8 @@ const Cart: React.FC = () => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    const cartItems = getItemLocalStorage("cart");
-    setCartItems(cartItems);
+    const cartLocalStorage = getItemLocalStorage("cart");
+    setCartItems(cartLocalStorage);
   }, []);
 
   return (

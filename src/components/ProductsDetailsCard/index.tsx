@@ -1,8 +1,5 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import Image from "next/image";
-import { formatPriceBRL } from "../../utils/functions";
+import React, { Dispatch, SetStateAction } from "react";
 import { saveToLocalStorage } from "../../utils/localStorage";
-
 
 interface Product {
   id: number;
@@ -29,8 +26,6 @@ const ProductsDetailsCard: React.FC<ProductCardProps> = ({
   cartItems,
   setCartItems,
 }: ProductCardProps) => {
-  const firstHalfPriceMember = product.priceMember.toString().split(".")[0];
-  const secondHalfPriceMember = product.priceMember.toString().split(".")[1];
 
   const onAddToCart = () => {
     const exist = cartItems.find((item) => item.id === product.id);
