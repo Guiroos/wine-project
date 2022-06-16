@@ -12,7 +12,7 @@ const Cart: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div id="cart-page">
       <Navbar />
       <div>
         {cartItems ? (
