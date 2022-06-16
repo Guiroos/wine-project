@@ -60,4 +60,6 @@ describe('test routing and rendering in navbar elements', () => {
     cy.get("#navbar-cart").click();
     cy.get("#cart-page").should('exist'); 
   })
- })
+})
+
+export {};
