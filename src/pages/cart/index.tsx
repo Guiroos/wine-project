@@ -17,7 +17,11 @@ const Cart: React.FC = () => {
       <div>
         {cartItems ? (
           cartItems.map((cartItem) => (
-            <CartItemsCard key={cartItem.id} cartItem={cartItem} />
+            <CartItemsCard
+              key={cartItem.id}
+              cartItem={cartItem}
+              setCartItems={setCartItems}
+            />
           ))
         ) : (
           <div>Não há itens no carrinho</div>
