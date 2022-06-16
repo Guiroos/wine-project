@@ -34,9 +34,9 @@ const Catalog: React.FC = () => {
       setCartItems(cart);
     } else {
       setCartItems([]);
-      saveToLocalStorage("cart", cartItems);
+      saveToLocalStorage("cart", []);
     }
-  }, [setCartItems]);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -98,8 +98,8 @@ const Catalog: React.FC = () => {
         ) : error ? (
           <div>{error}</div>
         ) : (
-          <ProductDiv>
-            <FoundItemsDiv>
+          <ProductDiv id="products">
+            <FoundItemsDiv id="found-products">
               <span>{filter ? filteredProducts.length : totalItems}</span>
               <span>produtos encontrados</span>
             </FoundItemsDiv>

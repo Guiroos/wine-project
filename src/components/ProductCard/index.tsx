@@ -44,22 +44,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const onAddToCart = () => {
     const exist = cartItems.find((item) => item.id === product.id);
     if (exist) {
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
+      const newCart = cartItems.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
-      saveToLocalStorage("cart", cartItems);
+      setCartItems(newCart);
+      saveToLocalStorage("cart", newCart);
     } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
-      saveToLocalStorage("cart", cartItems);
+      const newCart = [...cartItems, { ...product, quantity: 1 }];
+      setCartItems(newCart);
+      saveToLocalStorage("cart", newCart);
     }
   };
 
   return (
-    <div>
+    <div id={`product-card-${product.id}`}>
       <Link href={`store/product/${product.id}`}>
         <ProductCardDiv>
           <Image
@@ -92,7 +90,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </ProductCardDiv>
       </Link>
-      <ProductCardButtonDiv>
+      <ProductCardButtonDiv id={`product-button-${product.id}`}>
         <ProductCardButton type="button" onClick={onAddToCart}>
           ADICIONAR
         </ProductCardButton>
