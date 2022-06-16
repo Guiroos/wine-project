@@ -88,7 +88,7 @@ const Catalog: React.FC = () => {
   }, [filter]);
 
   return (
-    <div>
+    <div id="store-page">
       <Navbar cartItems={cartItems} />
 
       <StoreDiv>
