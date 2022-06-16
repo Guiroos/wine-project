@@ -1,3 +1,8 @@
+import { Dispatch, SetStateAction } from "react";
+import {
+  getItemLocalStorage,
+  saveToLocalStorage,
+} from "../../utils/localStorage";
 import Image from "next/image";
 
 interface CartItem {
@@ -14,13 +19,21 @@ interface CartItem {
 
 interface CartItemCardProps {
   cartItem: CartItem;
+  setCartItems: Dispatch<SetStateAction<string[]>>;
 }
 
 const CartItemsCard: React.FC<CartItemCardProps> = ({
   cartItem,
+  setCartItems,
 }: CartItemCardProps) => {
+  const handleClick = (_e, item) => {
+    const cartStorage = getItemLocalStorage("cart");
+    const filteredMap = cartStorage.filter((iCart) => iCart.id !== item.id);
+    setCartItems(filteredMap);
+    saveToLocalStorage("cart", filteredMap);
+  };
   return (
-    <div>
+    <div id={`cart-card-item-${cartItem.id}`}>
       <div>
         <Image
           src={cartItem.image}
@@ -32,9 +45,10 @@ const CartItemsCard: React.FC<CartItemCardProps> = ({
           <div>
             <div>{cartItem.name}</div>
             <div>{cartItem.country}</div>
-            <div>{cartItem.quantity}</div>
+            <div id={`cart-card-item-quantity-${cartItem.id}`}>{cartItem.quantity}</div>
           </div>
         </div>
+        <button id={`cart-card-item-rmvButton-${cartItem.id}`} onClick={(e) => handleClick(e, cartItem)}>Remover</button>
       </div>
     </div>
   );

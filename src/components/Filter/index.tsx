@@ -7,12 +7,12 @@ interface FilterProps {
 
 const Filter: React.FC<FilterProps> = ({ setFilter }: FilterProps) => {
   return (
-    <div>
+    <div id="filter-list">
       <FilterList>
         <h2>Refine sua Busca</h2>
         <p>Por preço</p>
         <li>
-          <label>
+          <label id="price-filter-1">
             <input
               type="radio"
               value={["0", "40"]}
@@ -23,7 +23,7 @@ const Filter: React.FC<FilterProps> = ({ setFilter }: FilterProps) => {
           </label>
         </li>
         <li>
-          <label>
+          <label id="price-filter-2">
             <input
               type="radio"
               value={["40", "100"]}
@@ -34,7 +34,7 @@ const Filter: React.FC<FilterProps> = ({ setFilter }: FilterProps) => {
           </label>
         </li>
         <li>
-          <label>
+          <label id="price-filter-3">
             <input
               type="radio"
               value={["100", "200"]}
@@ -45,7 +45,7 @@ const Filter: React.FC<FilterProps> = ({ setFilter }: FilterProps) => {
           </label>
         </li>
         <li>
-          <label>
+          <label id="price-filter-4">
             <input
               type="radio"
               value={["200", "500"]}
@@ -56,7 +56,7 @@ const Filter: React.FC<FilterProps> = ({ setFilter }: FilterProps) => {
           </label>
         </li>
         <li>
-          <label>
+          <label id="price-filter-5">
             <input
               type="radio"
               value={["500", "1000000"]}
