@@ -33,7 +33,7 @@ const CartItemsCard: React.FC<CartItemCardProps> = ({
     saveToLocalStorage("cart", filteredMap);
   };
   return (
-    <div>
+    <div id={`cart-card-item-${cartItem.id}`}>
       <div>
         <Image
           src={cartItem.image}
@@ -45,10 +45,10 @@ const CartItemsCard: React.FC<CartItemCardProps> = ({
           <div>
             <div>{cartItem.name}</div>
             <div>{cartItem.country}</div>
-            <div>{cartItem.quantity}</div>
+            <div id={`cart-card-item-quantity-${cartItem.id}`}>{cartItem.quantity}</div>
           </div>
         </div>
-        <button onClick={(e) => handleClick(e, cartItem)}>Remover</button>
+        <button id={`cart-card-item-rmvButton-${cartItem.id}`} onClick={(e) => handleClick(e, cartItem)}>Remover</button>
       </div>
     </div>
   );
